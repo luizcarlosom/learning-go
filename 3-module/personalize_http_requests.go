@@ -2,13 +2,11 @@ package main
 
 import (
 	"context"
-	"fmt"
-	"io"
 	"net/http"
 	"time"
 )
 
-func main() {
+func PersonalizeHttpRequests() {
 	ctx := context.Background()
 	ctx, cancel := context.WithTimeout(ctx, 5*time.Second)
 	defer cancel()
@@ -33,12 +31,4 @@ func main() {
 	}
 
 	defer resp.Body.Close()
-
-	data, err := io.ReadAll(resp.Body)
-
-	if err != nil {
-		panic(err)
-	}
-
-	fmt.Println(string(data))
 }
