@@ -74,6 +74,12 @@ func genCode() string {
 
 func handleGet(db map[string]string) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
+		code := chi.URLParam(r, "code")
+		data, ok := db[code]
+		if !ok {
+			http.Error(w, "Url not found", http.StatusNotFound)
+		}
+		http.Redirect(w, r, data, http.StatusPermanentRedirect)
 	}
 }
 
